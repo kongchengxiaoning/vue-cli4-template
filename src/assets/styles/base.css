@@ -1,0 +1,123 @@
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  -webkit-text-size-adjust:none;
+  padding: 0;
+}
+
+a {
+  background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-appearance: none;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  border-bottom: none;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+img,
+input {
+  border: none;
+  vertical-align: middle;
+}
+
+ul, ol, li {
+  list-style: none;
+}
+
+input,
+textarea {
+  -webkit-user-select: auto; /*webkit浏览器*/
+  outline: none;
+}
+
+::-webkit-input-placeholder {
+  width: 100%;
+}
+
+/*去除搜索框默认的×*/
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  /*//此处只是去掉默认的小×*/
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+pre {
+  white-space: pre-wrap;
+  /* css-3 */
+  white-space: -moz-pre-wrap;
+  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;
+  /* Opera 4-6 */
+  white-space: -o-pre-wrap;
+  /* Opera 7 */
+  word-wrap: break-word;
+  /* Internet Explorer 5.5+ */
+}
+
+.text-hid1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.text-hid2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.hover-hand {
+  cursor: pointer;
+}
+
+.tx-c {
+  text-align: center;
+}
+
+html{
+  scroll-behavior: smooth
+}

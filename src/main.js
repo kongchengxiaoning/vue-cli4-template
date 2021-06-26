@@ -2,8 +2,33 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import api from '@/service/api'
+import config from '@/assets/scripts/config'
+import consts from '@/assets/scripts/consts'
+import tools from '@/assets/scripts/tools'
+import utils from '@/assets/scripts/utils'
 
+/**
+ * @description 初始化样式
+ */
+import '@/assets/styles/index.scss'
+
+/**
+ * @description 生产环境关掉提示
+ */
 Vue.config.productionTip = false
+
+/**
+ * @description 全局注册应用配置
+ */
+Vue.prototype.$store = store
+Vue.prototype.api = api
+Vue.prototype.$config = config
+Vue.prototype.consts = consts
+Vue.prototype.tools = tools
+Vue.prototype.utils = utils
+
+// store.dispatch('login', {})
 
 new Vue({
   router,

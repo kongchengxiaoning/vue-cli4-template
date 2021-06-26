@@ -1,29 +1,59 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import $config from '@/assets/scripts/config'
+
+import ERROR_ROUTES from '@/router/modules/error' // 错误页面路由
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    component: () => import('@/components/layout/layout'),
+    children: [
+      {
+        path: '/',
+        component: () => import(/* webpackChunkName: "Home-page" */'@/views/Home'),
+        meta: { title: '首页' }
+      }
+    ]
   },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+  ...ERROR_ROUTES
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach(async(to, from, next) => {
+  // 登录未过期或打开页面不需要登录
+  // if (store.getters.getUserInfo && store.getters.getToken) {
+  //   if (to.name !== 'Login') {
+  //     next()
+  //   } else {
+  //     next({
+  //       path: '/home'
+  //     })
+  //   }
+  // } else {
+  //   if (to.name === 'Login' || to.meta.noNeedLogin) {
+  //     next()
+  //   } else {
+  //     next({
+  //       path: '/login'
+  //     })
+  //   }
+  // }
+
+  return next()
+})
+
+router.afterEach(to => {
+  // 路由发生变化
+  window.document.title = `${$config.TITLE}-${to.meta.title}`
+  window.scrollTo(0, 0)
 })
 
 export default router
