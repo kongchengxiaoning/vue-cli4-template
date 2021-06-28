@@ -1,5 +1,5 @@
 # vue2-templates
-##vue-cli4/create
+## vue-cli4/create
 
 
 ## Project setup
