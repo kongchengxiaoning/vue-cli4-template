@@ -21,14 +21,11 @@ Vue.config.productionTip = false
 /**
  * @description 全局注册应用配置
  */
-Vue.prototype.$store = store
 Vue.prototype.api = api
-Vue.prototype.$config = config
+Vue.prototype.config = config
 Vue.prototype.consts = consts
 Vue.prototype.tools = tools
 Vue.prototype.utils = utils
-
-// store.dispatch('login', {})
 
 new Vue({
   router,

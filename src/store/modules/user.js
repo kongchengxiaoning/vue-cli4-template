@@ -1,6 +1,7 @@
-import $config from '@/assets/scripts/config'
+import config from '@/assets/scripts/config'
 
 const user = {
+  namespaced: true,
   state: {
     // 用户信息
     userInfo: null
@@ -16,7 +17,7 @@ const user = {
     },
     logout(store) {
       store.commit('setUserInfo', null)
-      window.location.href = $config.BASE_URL.PRO
+      window.location.href = config.BASE_URL.PRO
     }
   },
   getters: {

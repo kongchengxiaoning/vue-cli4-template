@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import $config from '@/assets/scripts/config'
+import config from '@/assets/scripts/config'
 
 import ERROR_ROUTES from '@/router/modules/error' // 错误页面路由
 
@@ -13,7 +13,7 @@ const routes = [
     children: [
       {
         path: '/',
-        component: () => import(/* webpackChunkName: "Home-page" */'@/views/Home'),
+        component: () => import(/* webpackChunkName: "Home-page" */ '@/views/Home'),
         meta: { title: '首页' }
       }
     ]
@@ -29,7 +29,7 @@ const router = new VueRouter({
 
 router.beforeEach(async(to, from, next) => {
   // 登录未过期或打开页面不需要登录
-  // if (store.getters.getUserInfo && store.getters.getToken) {
+  // if (store.getters['user/getUserInfo']) {
   //   if (to.name !== 'Login') {
   //     next()
   //   } else {
@@ -52,7 +52,7 @@ router.beforeEach(async(to, from, next) => {
 
 router.afterEach(to => {
   // 路由发生变化
-  window.document.title = `${$config.TITLE}-${to.meta.title}`
+  window.document.title = `${config.TITLE}-${to.meta.title}`
   window.scrollTo(0, 0)
 })
 

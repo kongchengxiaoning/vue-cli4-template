@@ -4,12 +4,12 @@
  * create by lvzhiyang
  */
 import axios from 'axios'
-import $config from '@/assets/scripts/config'
+import config from '@/assets/scripts/config'
 import store from '@/store'
 
 // 创建axios实例
-axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? $config.BASE_URL.PRO : $config.BASE_URL.DEV // 测试环境用dev 生产环境用pro
-axios.defaults.timeout = $config.TIMEOUT
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? config.BASE_URL.PRO : config.BASE_URL.DEV // 测试环境用dev 生产环境用pro
+axios.defaults.timeout = config.TIMEOUT
 
 // 设置允许带cookie
 axios.defaults.withCredentials = true
@@ -27,7 +27,7 @@ axios.interceptors.request.use(
   config => {
     // 开发环境使用固定token
     if (process.env.NODE_ENV === 'development') {
-      config.headers.common['token'] = '114'
+      // config.headers.common['token'] = ''
     }
     if (config.isThrottle) {
       if (throttleTimer) {
@@ -38,7 +38,7 @@ axios.interceptors.request.use(
         throttleTimer = setTimeout(() => {
           throttleTimer && clearTimeout(throttleTimer)
           throttleTimer = null
-        }, $config.THROTTLE_TIME)
+        }, config.THROTTLE_TIME)
       }
     }
     return config
@@ -54,9 +54,8 @@ axios.interceptors.response.use(
   res => {
     // 错误处理
     switch (res.data.code) {
-      // 403 token过期
-      // 清除token并跳转登录页
-      case '1001':
+      // token过期清除token并跳转登录页
+      case '403':
         store.dispatch('logout')
         break
       // 404请求不存在

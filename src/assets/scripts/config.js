@@ -8,7 +8,7 @@ export default {
   /**
    * @description 配置显示在浏览器标签的title
    */
-  TITLE: '查查查官网',
+  TITLE: 'VUE2',
   /** ·
    * @description 图片缺省
    */
@@ -42,7 +42,6 @@ export default {
    */
   PAGE: 1,
   PAGE_SIZE_10: 10,
-  PAGE_SIZE_12: 12, // 模版市场
   PAGE_SIZE_20: 20,
   PAGER_COUNT: 10 // 最大页码按钮数
 }

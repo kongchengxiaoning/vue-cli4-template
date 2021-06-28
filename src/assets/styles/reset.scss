@@ -1,31 +1,9 @@
-body,
-div,
-dl,
-dt,
-dd,
-ul,
-ol,
-li,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-pre,
-form,
-fieldset,
-legend,
-input,
-button,
-textarea,
-p,
-blockquote,
-th,
-td {
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre,
+form, fieldset, legend, input, button, textarea, p, blockquote, th, td,
+footer, header, article, aside, section, nav {
   margin: 0;
-  -webkit-text-size-adjust:none;
   padding: 0;
+  -webkit-text-size-adjust:none;
 }
 
 a {
@@ -59,7 +37,6 @@ ul, ol, li {
 
 input,
 textarea {
-  -webkit-user-select: auto; /*webkit浏览器*/
   outline: none;
 }
 
@@ -94,28 +71,6 @@ pre {
   /* Opera 7 */
   word-wrap: break-word;
   /* Internet Explorer 5.5+ */
-}
-
-.text-hid1 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
-
-.text-hid2 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.hover-hand {
-  cursor: pointer;
-}
-
-.tx-c {
-  text-align: center;
 }
 
 html{

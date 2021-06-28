@@ -3,20 +3,20 @@
   background-position: $positon;
   background-size: $size;
   background-repeat: no-repeat;
-  background-image: url('./' + $url + "." + $suffix);
+  background-image: url('/' + $url + "." + $suffix);
 }
 // 背景图片处理
 @mixin bgsvg($url,$suffix: 'svg', $size: 100% 100%, $positon: center) {
   background-position: $positon;
   background-size: $size;
   background-repeat: no-repeat;
-  background-image: url('./' + $url + "." + $suffix);
+  background-image: url('/' + $url + "." + $suffix);
 }
 // mask背景图片处理
 @mixin mask-bg($bgcolor, $url, $suffix: 'png', $size: 100% 100%) {
   background-color: $bgcolor;
-  -webkit-mask: url('./' + $url + "." + $suffix) no-repeat;
-  mask: url('./' + $url + "." + $suffix) no-repeat;
+  -webkit-mask: url('/' + $url + "." + $suffix) no-repeat;
+  mask: url('/' + $url + "." + $suffix) no-repeat;
   -webkit-mask-size: $size;
   mask-size: $size;
 }
