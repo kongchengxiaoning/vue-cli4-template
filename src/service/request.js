@@ -24,12 +24,12 @@ let throttleTimer = null
  * 请求拦截器
  */
 axios.interceptors.request.use(
-  config => {
+  res => {
     // 开发环境使用固定token
     if (process.env.NODE_ENV === 'development') {
-      // config.headers.common['token'] = ''
+      // res.headers.common['token'] = ''
     }
-    if (config.isThrottle) {
+    if (res.isThrottle) {
       if (throttleTimer) {
         return Promise.reject({
           data: { codemsg: '请勿频繁操作～' }
@@ -41,7 +41,7 @@ axios.interceptors.request.use(
         }, config.THROTTLE_TIME)
       }
     }
-    return config
+    return res
   },
   error => {
     return Promise.reject(error)
