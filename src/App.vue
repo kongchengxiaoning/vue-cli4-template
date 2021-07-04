@@ -12,11 +12,11 @@ export default {
 
 <style lang="scss" scoped>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: $bg-color;
+  color: $main-color;
   width: 100%;
-  color: #2c3e50;
 }
 </style>
