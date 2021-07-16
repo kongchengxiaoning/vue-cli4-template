@@ -27,6 +27,11 @@ Vue.prototype.consts = consts
 Vue.prototype.tools = tools
 Vue.prototype.utils = utils
 
+/**
+ * @description 注册Mock
+ */
+process.env.NODE_ENV === 'development' && require('../mock') // 打包时忽略
+
 new Vue({
   router,
   store,

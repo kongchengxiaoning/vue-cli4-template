@@ -9,7 +9,7 @@ import { request } from '@/service/request'
 
 const setUploadPhoto = data => {
   return request({
-    url: '/common/upload_imgs',
+    url: '/api/getTableData',
     method: 'POST',
     data
   })
