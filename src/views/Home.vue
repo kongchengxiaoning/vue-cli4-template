@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>首页</h1>
-    <img :src="utils.handleImg('/images/logo')" alt="vue">
+    <img :src="utils.handleImg('images/logo')" alt="vue">
   </div>
 </template>
 

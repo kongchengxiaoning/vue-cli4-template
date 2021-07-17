@@ -1,4 +1,5 @@
 import config from '@/assets/scripts/config'
+import { getLoginData } from '@/service/api/user'
 
 const user = {
   namespaced: true,
@@ -12,16 +13,18 @@ const user = {
     }
   },
   actions: {
-    async login(store, data) {
-      store.commit('setUserInfo', data)
+    // user login
+    async login({ commit }, userInfo) {
+      const { userName, password } = userInfo
+      const { data } = await getLoginData({ userName, password })
+      commit('setUserInfo', data)
+      window.location.href = config.BASE_URL.PRO
     },
-    logout(store) {
-      store.commit('setUserInfo', null)
+    // user logout
+    logout({ commit }) {
+      commit('setUserInfo', null)
       window.location.href = config.BASE_URL.PRO
     }
-  },
-  getters: {
-    getUserInfo: (state) => state.userInfo
   }
 }
 

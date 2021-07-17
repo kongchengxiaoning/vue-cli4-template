@@ -32,7 +32,7 @@ axios.interceptors.request.use(
     if (res.isThrottle) {
       if (throttleTimer) {
         return Promise.reject({
-          data: { codemsg: '请勿频繁操作～' }
+          data: { msg: '请勿频繁操作～' }
         })
       } else {
         throttleTimer = setTimeout(() => {
@@ -76,7 +76,7 @@ export function request(options) {
     axios(options)
       .then(res => {
         const { code } = res.data
-        if (code !== '0000') {
+        if (code !== 0) {
           return reject(res)
         }
         return resolve(res.data)

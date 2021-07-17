@@ -1,12 +1,12 @@
 import { request } from '@/service/request'
 
 /**
- * @description 上传图片
+ * @description 获取登录信息
  */
 
-export const setUploadPhoto = data => {
+export const getLoginData = data => {
   return request({
-    url: '/api/getTableData',
+    url: '/login',
     method: 'POST',
     data
   })

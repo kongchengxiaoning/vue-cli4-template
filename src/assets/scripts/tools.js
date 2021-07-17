@@ -315,6 +315,18 @@ const tools = {
       return false
     }
     return true
+  },
+  /**
+   * @returns {String} 数量过万截取
+   */
+  handleAmount(value, unit = '万') {
+    if (value === null || value === undefined) {
+      return '--'
+    } else if (value < 10000) {
+      return value
+    } else {
+      return `${Math.floor(value / 1000) / 10}${unit}`
+    }
   }
 }
 

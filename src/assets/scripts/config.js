@@ -1,10 +1,11 @@
 // 开发环境为true 生产环境为false
 const DEBUG = true
-// 移动端地址
-const SERVER_PATH = DEBUG ? `/prefix` : ''
 
 export default {
-  SERVER_PATH,
+  /**
+   * @description debug
+   */
+  DEBUG,
   /**
    * @description 配置显示在浏览器标签的title
    */
@@ -26,7 +27,6 @@ export default {
    */
   BASE_URL: {
     DEV: '/prefix',
-    // dev: 'https://www.easy-mock.com/mock/',
     PRO: location.origin
   },
   /**
