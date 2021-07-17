@@ -1,4 +1,4 @@
-# Vue-templates
+# Vue2-template
 
 ## Project setup
 ```
