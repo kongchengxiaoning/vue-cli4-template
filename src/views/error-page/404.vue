@@ -1,16 +1,15 @@
 <template>
   <div class="content">
-    <h3>404</h3>
+    <svg-icon class="iconfont" icon-class="404"></svg-icon>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .content {
-  h3 {
-    text-align: center;
-    padding: 20px;
+  padding: 20px;
+  text-align: center;
+  .iconfont {
     font-size: 100px;
-    font-weight: bold;
   }
 }
 </style>

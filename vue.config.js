@@ -49,7 +49,7 @@ module.exports = {
     // 配置代理
     proxy: {
       '/prefix': {
-        target: 'http://localhost:8080', // 接口地址
+        target: 'http://localhost:8080',
         changeOrigin: true,
         ws: true,
         pathRewrite: {
@@ -75,25 +75,40 @@ module.exports = {
       )
     }
     if (process.env.NODE_ENV === 'development') {
-      /**
-       * 关闭host check，方便使用ngrok之类的内网转发工具
-       */
+      // 关闭host check，方便使用ngrok之类的内网转发工具
       myConfig.devServer = {
         disableHostCheck: true
       }
     }
     return myConfig
   },
-  transpileDependencies: ['webpack-dev-server/client'],
+  // IE9 10页面空白不显示问题
+  // transpileDependencies: ['webpack-dev-server/client'],
   chainWebpack: (config) => {
     // 修复HMR
     config.resolve.symlinks(true)
     // config.entry.app = ['babel-polyfill', './src/main.js']
     config.resolve.alias
       .set('@', path.join(__dirname, 'src'))
-    /**
-     * 添加CDN参数到htmlWebpackPlugin配置中
-     */
+
+    // svg-sprite-loader
+    config.module
+      .rule('svg')
+      .exclude.add(path.join(__dirname, 'src/assets/icons'))
+      .end()
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(path.join(__dirname, 'src/assets/icons'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
+      .end()
+
+    // 添加CDN参数到htmlWebpackPlugin配置中
     config
       .plugin('html')
       .tap(args => {

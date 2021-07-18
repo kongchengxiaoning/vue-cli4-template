@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import './assets/icons'
 import config from '@/assets/scripts/config'
 import consts from '@/assets/scripts/consts'
 import tools from '@/assets/scripts/tools'
@@ -20,10 +21,10 @@ Vue.config.productionTip = false
 /**
  * @description 全局注册应用配置
  */
-Vue.prototype.config = config
-Vue.prototype.consts = consts
-Vue.prototype.tools = tools
-Vue.prototype.utils = utils
+Vue.prototype.$config = config
+Vue.prototype.$consts = consts
+Vue.prototype.$tools = tools
+Vue.prototype.$utils = utils
 
 /**
  * @description 引入mock, 不使用的时候需要注释掉

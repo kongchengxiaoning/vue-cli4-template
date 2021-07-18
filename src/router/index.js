@@ -9,14 +9,14 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    component: () => import('@/components/layout/layout'),
+    component: () => import('@/layout'),
     hidden: true,
     children: [
       {
         path: '/',
         name: 'Home',
-        component: () => import('@/views/Home'),
-        meta: { title: '首页', noNeedLogin: false }
+        component: () => import('@/views/home'),
+        meta: { title: '首页', noNeedLogin: true }
       }
     ]
   },
