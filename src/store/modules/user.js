@@ -1,6 +1,8 @@
 import config from '@/assets/scripts/config'
 import { getLoginData } from '@/service/api/user'
 
+const { BASE_URL } = config
+
 const user = {
   namespaced: true,
   state: {
@@ -18,12 +20,12 @@ const user = {
       const { userName, password } = userInfo
       const { data } = await getLoginData({ userName, password })
       commit('setUserInfo', data)
-      window.location.href = config.BASE_URL.PRO
+      window.location.href = BASE_URL.PRO
     },
     // user logout
     logout({ commit }) {
       commit('setUserInfo', null)
-      window.location.href = config.BASE_URL.PRO
+      window.location.href = BASE_URL.PRO
     }
   }
 }

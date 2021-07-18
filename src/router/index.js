@@ -4,6 +4,8 @@ import store from '@/store'
 import config from '@/assets/scripts/config'
 import ERROR_ROUTES from '@/router/modules/error' // 错误页面路由
 
+const { TITLE } = config
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -63,7 +65,7 @@ router.afterEach(to => {
   // 路由发生变化
   const metaTitle = to.meta.title
   if (metaTitle) {
-    window.document.title = `${config.TITLE}-${metaTitle}`
+    window.document.title = `${TITLE}-${metaTitle}`
   }
 })
 

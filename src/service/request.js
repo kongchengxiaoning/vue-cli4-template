@@ -7,8 +7,10 @@ import axios from 'axios'
 import config from '@/assets/scripts/config'
 import store from '@/store'
 
+const { BASE_URL, THROTTLE_TIME } = config
+
 // 创建axios实例
-axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? config.BASE_URL.PRO : config.BASE_URL.DEV // 测试环境用dev 生产环境用pro
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? BASE_URL.PRO : BASE_URL.DEV // 测试环境用dev 生产环境用pro
 axios.defaults.timeout = config.TIMEOUT
 
 // 设置允许带cookie
@@ -38,7 +40,7 @@ axios.interceptors.request.use(
         throttleTimer = setTimeout(() => {
           throttleTimer && clearTimeout(throttleTimer)
           throttleTimer = null
-        }, config.THROTTLE_TIME)
+        }, THROTTLE_TIME)
       }
     }
     return res
