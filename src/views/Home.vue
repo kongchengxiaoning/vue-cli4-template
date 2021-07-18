@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { getExplorer } from '@/assets/scripts/tools'
 import logoUrl from '@/assets/images/logo.png'
 
 export default {
@@ -13,6 +14,16 @@ export default {
   data() {
     return {
       logoUrl
+    }
+  },
+  created() {
+    this.getExplorer()
+  },
+  methods: {
+    // 获取当前浏览器信息
+    getExplorer() {
+      const info = getExplorer()
+      console.log(info)
     }
   }
 }

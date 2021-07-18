@@ -5,8 +5,6 @@ import store from './store'
 import './assets/icons'
 import config from '@/assets/scripts/config'
 import consts from '@/assets/scripts/consts'
-import tools from '@/assets/scripts/tools'
-import utils from '@/assets/scripts/utils'
 
 /**
  * @description 初始化样式
@@ -23,8 +21,6 @@ Vue.config.productionTip = false
  */
 Vue.prototype.$config = config
 Vue.prototype.$consts = consts
-Vue.prototype.$tools = tools
-Vue.prototype.$utils = utils
 
 /**
  * @description 引入mock, 不使用的时候需要注释掉
