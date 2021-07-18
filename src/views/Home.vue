@@ -1,13 +1,20 @@
 <template>
   <div class="home">
     <h1>首页</h1>
-    <img :src="$utils.handleImg('images/logo')" alt="vue">
+    <img :src="logoUrl" alt="vue">
   </div>
 </template>
 
 <script>
+import logoUrl from '@/assets/images/logo.png'
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  data() {
+    return {
+      logoUrl
+    }
+  }
 }
 </script>
 
