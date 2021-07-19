@@ -12,6 +12,13 @@ import consts from '@/assets/scripts/consts'
 import '@/assets/styles/index.scss'
 
 /**
+ * @description ElementUI
+ */
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(ElementUI)
+
+/**
  * @description 生产环境关掉提示
  */
 Vue.config.productionTip = false

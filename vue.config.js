@@ -6,7 +6,8 @@ const externals = {
   'axios': 'axios',
   'vue': 'Vue',
   'vue-router': 'VueRouter',
-  'vuex': 'Vuex'
+  'vuex': 'Vuex',
+  'element-ui': 'ELEMENT'
 }
 // CDN外链，会插入到index.html中
 const cdn = {
@@ -23,7 +24,8 @@ const cdn = {
       'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js',
       'https://cdn.jsdelivr.net/npm/vue-router@3.4.3/dist/vue-router.min.js',
       'https://cdn.jsdelivr.net/npm/vuex@3.5.1/dist/vuex.min.js',
-      'https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js'
+      'https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js',
+      'https://cdn.jsdelivr.net/npm/element-ui@2.15.3/lib/index.min.js'
     ]
   }
 }

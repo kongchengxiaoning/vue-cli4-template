@@ -1,10 +1,17 @@
 <template>
-  <div>
-    <form class="from" onsubmit="return false">
-      <input v-model="userName" type="text" placeholder="请输入账号" />
-      <input v-model="password" type="text" placeholder="请输入密码" />
-      <button @click="getLogin({ userName, password })">登录</button>
-    </form>
+  <div class="form-box">
+    <el-form ref="myForm" :model="formDate" :rules="rules" label-width="100px" status-icon class="demo-ruleForm">
+      <el-form-item label="密码" prop="userName">
+        <el-input v-model="formDate.userName" type="text" placeholder="请输入账号" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="确认密码" prop="password">
+        <el-input v-model="formDate.password" type="password" placeholder="请输入密码" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('myForm')">提交</el-button>
+        <el-button @click="resetForm('myForm')">重置</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
@@ -15,36 +22,46 @@ export default {
   name: 'Login',
   data() {
     return {
-      userName: 'admin',
-      password: '123456'
+      formDate: {
+        userName: 'admin',
+        password: '123456'
+      },
+      rules: {
+        userName: [
+          { required: true, message: '请输入账号', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' }
+        ]
+      }
     }
   },
   methods: {
     // 获取登录信息
     ...mapActions({
       getLogin: 'user/login'
-    })
+    }),
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.getLogin(this.formDate)
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields()
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.from {
-  width: 300px;
+.form-box {
+  width: 400px;
   margin: 50px auto 0;
   text-align: center;
-  input {
-    width: 100%;
-    height: 30px;
-    border: 1px solid $border-color;
-    margin-top: 20px;
-    border-radius: 4px;
-  }
-  button {
-    margin-top: 20px;
-    border-radius: 4px;
-    height: 30px;
-    width: 80px;
-  }
 }
 </style>

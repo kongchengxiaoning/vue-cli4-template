@@ -1,9 +1,9 @@
 /**
  * axios封装
  * 请求拦截、响应拦截、错误统一处理
- * create by lvzhiyang
  */
 import axios from 'axios'
+import { Message } from 'element-ui'
 import config from '@/assets/scripts/config'
 import store from '@/store'
 
@@ -17,7 +17,7 @@ axios.defaults.timeout = config.TIMEOUT
 axios.defaults.withCredentials = true
 
 // 设置post请求头
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 
 // 节流计时器
 let throttleTimer = null
@@ -86,15 +86,31 @@ export function request(options) {
       .catch(err => {
         if (err && err.request && err.request.readyState === 4) {
           if (err.request.status === 200) {
-            console.log('数据请求异常，请联系管理员')
+            Message({
+              message: '数据请求异常，请联系管理员',
+              type: 'error',
+              duration: 3e3
+            })
           } else {
-            console.log('无网络，请检查网络')
+            Message({
+              message: '无网络，请检查网络',
+              type: 'error',
+              duration: 3e3
+            })
           }
         } else {
           if (err && err.request && err.request.readyState === 0 && err.status === 0) {
-            console.log('无网络，请检查网络')
+            Message({
+              message: '无网络，请检查网络',
+              type: 'error',
+              duration: 3e3
+            })
           } else {
-            console.log(err.data.codemsg)
+            Message({
+              message: err.data.codemsg,
+              type: 'error',
+              duration: 3e3
+            })
           }
         }
         return reject(err)
