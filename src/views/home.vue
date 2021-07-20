@@ -1,16 +1,13 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
+    <h1>首页</h1>
     <img :src="logoUrl" alt="vue">
-    <div>
-      <el-button @click="logout">退出</el-button>
-    </div>
   </div>
 </template>
 
 <script>
+import { getExplorer } from '@/assets/scripts/tools'
 import logoUrl from '@/assets/images/logo.png'
-import { mapActions } from 'vuex'
 
 export default {
   name: 'Home',
@@ -19,10 +16,15 @@ export default {
       logoUrl
     }
   },
+  created() {
+    this.getExplorer()
+  },
   methods: {
-    ...mapActions({
-      'logout': 'user/logout'
-    })
+    // 获取当前浏览器信息
+    getExplorer() {
+      const info = getExplorer()
+      console.log(info)
+    }
   }
 }
 </script>
