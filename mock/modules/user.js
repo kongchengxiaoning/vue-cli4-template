@@ -6,6 +6,7 @@ const USER_MAP = {
   }
 }
 
+// user login
 export const login = req => {
   req = JSON.parse(req.body)
   if (req.password !== '123456' || req.userName !== 'admin') {
@@ -16,8 +17,17 @@ export const login = req => {
     }
   }
   return {
-    code: 0,
+    code: '0000',
     msg: 'success',
     data: USER_MAP[req.userName]
+  }
+}
+
+// user logout
+export const logout = () => {
+  return {
+    code: '0000',
+    msg: '成功',
+    data: {}
   }
 }

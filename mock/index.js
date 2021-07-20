@@ -1,5 +1,5 @@
 import Mock from 'mockjs'
-import { login } from './modules/login'
+import { login, logout } from './modules/user'
 
 // 可以设置响应的时间
 Mock.setup({
@@ -8,5 +8,7 @@ Mock.setup({
 
 // 登录获取用户信息
 Mock.mock(/\/login/, login)
+// 注销登录信息
+Mock.mock(/\/logout/, logout)
 
 export default Mock

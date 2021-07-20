@@ -1,4 +1,4 @@
-import { request } from '@/service/request'
+import request from '@/service/request'
 
 /**
  * @description 上传图片

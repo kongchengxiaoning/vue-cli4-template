@@ -1,5 +1,7 @@
 import config from '@/assets/scripts/config'
-import { getLoginData } from '@/service/api/user'
+import { setLogin, setLogout } from '@/service/api/user'
+import { setToken, removeToken } from '@/utils/auth'
+import { resetRouter } from '@/router'
 
 const { BASE_URL } = config
 
@@ -16,16 +18,31 @@ const user = {
   },
   actions: {
     // user login
-    async login({ commit }, userInfo) {
+    login({ commit }, userInfo) {
       const { userName, password } = userInfo
-      const { data } = await getLoginData({ userName, password })
-      commit('setUserInfo', data)
-      window.location.href = BASE_URL.PRO
+      return new Promise((resolve, reject) => {
+        setLogin({ userName, password }).then(data => {
+          commit('setUserInfo', data)
+          setToken(data.token)
+          window.location.href = BASE_URL.PRO
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
     },
     // user logout
-    logout({ commit }) {
-      commit('setUserInfo', null)
-      window.location.href = BASE_URL.PRO
+    logout({ state, commit }) {
+      return new Promise((resolve, reject) => {
+        setLogout(state.userInfo.token).then(() => {
+          commit('setUserInfo', null)
+          removeToken()
+          resetRouter()
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
     }
   }
 }
