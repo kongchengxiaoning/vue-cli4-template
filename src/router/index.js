@@ -1,24 +1,26 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
 import store from '@/store'
 import config from '@/assets/scripts/config'
+
+import Layout from '@/layout'
 import ERROR_ROUTES from '@/router/modules/error' // 错误页面路由
 
 const { TITLE } = config
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
 const routes = [
   {
     path: '/',
-    component: () => import('@/layout'),
+    component: Layout,
     hidden: true,
     children: [
       {
         path: '/',
         name: 'Home',
         component: () => import('@/views/home'),
-        meta: { title: '首页', noNeedLogin: true }
+        meta: { title: '首页', noNeedLogin: false }
       }
     ]
   },
@@ -31,12 +33,27 @@ const routes = [
   ...ERROR_ROUTES
 ]
 
-const router = new VueRouter({
-  mode: 'history',
+const createRouter = () => new Router({
   base: process.env.BASE_URL,
+  mode: 'history',
   scrollBehavior: () => ({ x: 0, y: 0 }),
   routes
 })
+
+const router = createRouter()
+
+// 重置路由
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher
+}
+
+// 获取原型对象上的push函数
+const originalPush = Router.prototype.push
+// 修改原型对象中的push方法
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
 router.beforeEach(async(to, from, next) => {
   // 登录未过期或打开页面不需要登录

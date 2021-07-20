@@ -2,7 +2,7 @@
   <div class="warp">
     <!-- 顶部导航 -->
     <div class="header">
-      <h4 style="text-align:center; padding: 20px">hander</h4>
+      <h4 style="text-align:center; padding: 20px">Head</h4>
     </div>
     <!-- 内容 -->
     <div class="main">
@@ -10,7 +10,7 @@
     </div>
     <!-- 底部内容 -->
     <div class="footer">
-      <h4 style="text-align:center; padding: 20px">footer</h4>
+      <h4 style="text-align:center; padding: 20px">Footer</h4>
     </div>
   </div>
 </template>

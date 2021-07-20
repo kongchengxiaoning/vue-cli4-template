@@ -32,12 +32,13 @@ const user = {
       })
     },
     // user logout
-    logout({ state, commit }) {
+    logout({ commit }) {
       return new Promise((resolve, reject) => {
-        setLogout(state.userInfo.token).then(() => {
+        setLogout().then(() => {
           commit('setUserInfo', null)
           removeToken()
           resetRouter()
+          window.location.href = BASE_URL.PRO
           resolve()
         }).catch(error => {
           reject(error)
