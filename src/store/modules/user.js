@@ -38,7 +38,7 @@ const user = {
           commit('setUserInfo', null)
           removeToken()
           resetRouter()
-          window.location.href = BASE_URL.PRO
+          window.location.reload()
           resolve()
         }).catch(error => {
           reject(error)

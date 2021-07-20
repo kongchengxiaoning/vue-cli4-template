@@ -35,17 +35,15 @@ const productionGzip = true
 const productionGzipExtensions = ['js', 'css']
 
 module.exports = {
-  // 部署生产环境和开发环境下的URL。
-  // 默认情况下，Vue CLI 会假设你的应用是被部署在一个域名的根路径上
-  // 例如 https://www.my-app.com/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 https://www.my-app.com/my-app/，则设置 publicPath 为 /my-app/。
-  publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
+  // 所有资源指定一个基础路径
+  publicPath: '/',
   // 设为false打包时不生成.map文件
   productionSourceMap: true,
+  // 打包生成的静态资源目录
   outputDir: 'dist',
-  // 是否使用eslint,设置为true，eslint-loader将发出lint错误作为警告。默认情况下，警告仅记录到终端，并且不会使编译失败。
-  lintOnSave: process.env.NODE_ENV !== 'production',
-
-  // 如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
+  // 是否使用eslint,设置为true
+  lintOnSave: process.env.NODE_ENV === 'development',
+  // 开发服务器设置
   devServer: {
     open: true,
     // 配置代理
@@ -63,10 +61,10 @@ module.exports = {
   configureWebpack: (config) => {
     const myConfig = {}
     if (process.env.NODE_ENV === 'production') {
-      // 1. 生产环境npm包转CDN
+      // 生产环境npm包转CDN
       myConfig.externals = externals
       myConfig.plugins = []
-      // 构建时开启gzip，降低服务器压缩对CPU资源的占用，服务器也要相应开启gzip
+      // 构建时开启gzip，服务器也要相应开启gzip
       productionGzip && myConfig.plugins.push(
         new CompressionWebpackPlugin({
           test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
@@ -129,7 +127,7 @@ module.exports = {
     sourceMap: false,
     loaderOptions: {
       scss: {
-        // 向全局sass样式传入共享的全局变量, $src可以配置图片cdn前缀
+        // 向全局sass样式传入共享的全局变量
         // 详情: https://cli.vuejs.org/guide/css.html#passing-options-to-pre-processor-loaders
         prependData: `
         @import "@/assets/styles/global.scss";

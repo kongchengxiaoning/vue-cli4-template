@@ -55,9 +55,7 @@ service.interceptors.response.use(
     // 错误处理
     if (res.code !== '0000') {
       if (res.code === '4003') {
-        store.dispatch('user/logout').then(() => {
-          location.reload()
-        })
+        store.dispatch('user/logout')
       } else {
         Message({
           message: res.msg || 'Error',
