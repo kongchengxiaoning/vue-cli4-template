@@ -1,5 +1,5 @@
 import config from '@/assets/scripts/config'
-import { setLogin, setLogout } from '@/service/api/user'
+import { setLogin, setLogout } from '@/api/user'
 import { setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 

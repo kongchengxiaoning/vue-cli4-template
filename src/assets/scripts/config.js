@@ -36,12 +36,5 @@ export default {
   /**
    * @description 接口超时时间 毫秒
    */
-  TIMEOUT: 1000 * 60 * 10,
-  /**
-   * @description 分页
-   */
-  PAGE: 1,
-  PAGE_SIZE_10: 10,
-  PAGE_SIZE_20: 20,
-  PAGER_COUNT: 10 // 最大页码按钮数
+  TIMEOUT: 1000 * 60 * 10
 }

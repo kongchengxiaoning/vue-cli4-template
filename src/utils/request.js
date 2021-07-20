@@ -3,12 +3,12 @@
  * 请求拦截、响应拦截、错误统一处理
  */
 import axios from 'axios'
-import { Message } from 'element-ui'
-import config from '@/assets/scripts/config'
 import store from '@/store'
+import config from '@/assets/scripts/config'
+import { Message } from 'element-ui'
 import { getToken } from '@/utils/auth'
 
-const { BASE_URL, TIMEOUT, THROTTLE_TIME } = config
+const { BASE_URL, TIMEOUT, THROTTLE_TIME, TOKEN_KEY } = config
 
 const service = axios.create({
   baseURL: process.env.NODE_ENV === 'production' ? BASE_URL.PRO : BASE_URL.DEV, // 测试环境用dev 生产环境用pro
@@ -24,7 +24,7 @@ service.interceptors.request.use(
     request.headers['Content-Type'] = 'application/json;charset=UTF-8' // 'application/x-www-form-urlencoded'
 
     if (store.getters.userInfo && store.getters.userInfo.token) {
-      request.headers['token'] = getToken()
+      request.headers[TOKEN_KEY] = getToken()
     }
 
     // 频繁请求拦截

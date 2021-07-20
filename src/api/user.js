@@ -1,4 +1,4 @@
-import request from '@/service/request'
+import request from '@/utils/request'
 
 /**
  * @description 获取登录信息
