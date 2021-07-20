@@ -2,12 +2,14 @@
   <div class="home">
     <h1>首页</h1>
     <img :src="logoUrl" alt="vue">
+    <el-button @click="logout">退出登录</el-button>
   </div>
 </template>
 
 <script>
 import { getExplorer } from '@/assets/scripts/tools'
 import logoUrl from '@/assets/images/logo.png'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Home',
@@ -20,6 +22,9 @@ export default {
     this.getExplorer()
   },
   methods: {
+    ...mapActions[{
+      'logout': 'user/logout'
+    }],
     // 获取当前浏览器信息
     getExplorer() {
       const info = getExplorer()
