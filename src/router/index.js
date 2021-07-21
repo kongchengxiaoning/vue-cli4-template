@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '@/store'
 import config from '@/assets/scripts/config'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -69,7 +70,23 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      next()
+      // 获取用户信息
+      if (store.getters.userInfo) {
+        next()
+      } else {
+        try {
+          throw new Error('没获取到信息')
+          // get user info
+          // next({ ...to, replace: true })
+        } catch (error) {
+          await store.dispatch('user/logout')
+          next({
+            path: '/login',
+            query: { redirect: to.fullPath }
+          })
+          NProgress.done()
+        }
+      }
     }
   } else {
     if (to.meta.requireAuth) {

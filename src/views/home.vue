@@ -10,7 +10,6 @@
 
 <script>
 import logoUrl from '@/assets/images/logo.png'
-import { mapActions } from 'vuex'
 
 export default {
   name: 'Home',
@@ -20,9 +19,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      'setLogout': 'user/logout'
-    })
+    // 退出登录
+    async setLogout() {
+      await this.$store.dispatch('user/logout')
+      location.reload()
+    }
   }
 }
 </script>

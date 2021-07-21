@@ -15,15 +15,11 @@ export default {
    */
   IMG_ERROR: '',
   /**
-   * @description  存储token的key
+   * @description 请求Token的key
    */
   TOKEN_KEY: 'token',
   /**
-   * @description token在Cookie中存储的天数，默认1天
-   */
-  COOKIE_EXPIRES: 1,
-  /**
-   * @description api请求基础路径
+   * @description 请求基础路径
    */
   BASE_URL: {
     DEV: '/prefix',

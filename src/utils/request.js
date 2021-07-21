@@ -23,7 +23,7 @@ service.interceptors.request.use(
   request => {
     request.headers['Content-Type'] = 'application/json;charset=UTF-8' // 'application/x-www-form-urlencoded'
 
-    if (store.getters.userInfo && store.getters.userInfo.token) {
+    if (store.getters.token) {
       request.headers[TOKEN_KEY] = getToken()
     }
 
@@ -55,7 +55,9 @@ service.interceptors.response.use(
     // 错误处理
     if (res.code !== '0000') {
       if (res.code === '4003') {
-        store.dispatch('user/logout')
+        store.dispatch('user/logout').then(() => {
+          location.reload()
+        })
       } else {
         Message({
           message: res.msg || 'Error',
@@ -69,34 +71,18 @@ service.interceptors.response.use(
     }
   },
   error => {
-    if (error && error.request && error.request.readyState === 4) {
-      if (error.request.status === 200) {
-        Message({
-          message: '数据请求异常，请联系管理员',
-          type: 'error',
-          duration: 3e3
-        })
-      } else {
-        Message({
-          message: '无网络，请检查网络',
-          type: 'error',
-          duration: 3e3
-        })
-      }
+    if (error && error.request && error.request.status === 200) {
+      Message({
+        message: '数据请求异常，请稍后再试！',
+        type: 'error',
+        duration: 3e3
+      })
     } else {
-      if (error && error.request && error.request.readyState === 0 && error.status === 0) {
-        Message({
-          message: '无网络，请检查网络',
-          type: 'error',
-          duration: 3e3
-        })
-      } else {
-        Message({
-          message: error.data.msg,
-          type: 'error',
-          duration: 3e3
-        })
-      }
+      Message({
+        message: error.message,
+        type: 'error',
+        duration: 3e3
+      })
     }
     return Promise.reject(error)
   }

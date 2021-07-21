@@ -1,6 +1,6 @@
 // 访问store
 const getters = {
-  // 获取用户信息
-  getUserInfo: state => state.user.userInfo
+  userInfo: state => state.user.userInfo,
+  token: state => state.user.token
 }
 export default getters

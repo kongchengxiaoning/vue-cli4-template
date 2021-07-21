@@ -42,11 +42,11 @@ export default {
       getLogin: 'user/login'
     }),
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(async(valid) => {
         if (valid) {
-          this.getLogin(this.formDate)
+          await this.getLogin(this.formDate)
+          location.href = '/'
         } else {
-          console.log('error submit!!')
           return false
         }
       })
