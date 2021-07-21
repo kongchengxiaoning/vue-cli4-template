@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import config from '@/assets/scripts/config'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import { getToken } from '@/utils/auth'
 
 import Layout from '@/layout'
 import ERROR_ROUTES from '@/router/modules/error' // 错误页面路由
 
+NProgress.configure({ showSpinner: false }) // NProgress Configuration
 const { TITLE } = config
 
 Vue.use(Router)
@@ -56,12 +59,15 @@ Router.prototype.push = function push(location) {
 }
 
 router.beforeEach(async(to, from, next) => {
+  // 开始进度条
+  NProgress.start()
+  // 获取Token
   const hasToken = getToken()
-
   // 登录未过期或打开页面不需要登录
   if (hasToken) {
     if (to.path === '/login') {
       next({ path: '/' })
+      NProgress.done()
     } else {
       next()
     }
@@ -71,6 +77,7 @@ router.beforeEach(async(to, from, next) => {
         path: '/login',
         query: { redirect: to.fullPath }
       })
+      NProgress.done()
     } else {
       next()
     }
@@ -78,6 +85,8 @@ router.beforeEach(async(to, from, next) => {
 })
 
 router.afterEach(to => {
+  // 结束进度条
+  NProgress.done()
   // 路由发生变化
   const metaTitle = to.meta.title
   if (metaTitle) {
