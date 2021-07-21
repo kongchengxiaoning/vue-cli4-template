@@ -4,7 +4,7 @@ const ERROR_ROUTES = [
     name: 'Error401',
     component: () => import('@/views/error-page/404'),
     hidden: true,
-    meta: { title: '404', noNeedLogin: true }
+    meta: { title: '404', requireAuth: false }
   }
 ]
 

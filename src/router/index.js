@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from '@/store'
 import config from '@/assets/scripts/config'
+import { getToken } from '@/utils/auth'
 
 import Layout from '@/layout'
 import ERROR_ROUTES from '@/router/modules/error' // 错误页面路由
@@ -20,7 +20,7 @@ const routes = [
         path: '/',
         name: 'Home',
         component: () => import('@/views/home'),
-        meta: { title: '首页', noNeedLogin: false }
+        meta: { title: '首页', requireAuth: true }
       }
     ]
   },
@@ -56,26 +56,25 @@ Router.prototype.push = function push(location) {
 }
 
 router.beforeEach(async(to, from, next) => {
+  const hasToken = getToken()
+
   // 登录未过期或打开页面不需要登录
-  if (store.getters.getUserInfo) {
-    if (to.name !== 'Login') {
-      next()
+  if (hasToken) {
+    if (to.path === '/login') {
+      next({ path: '/' })
     } else {
-      next({
-        path: '/'
-      })
+      next()
     }
   } else {
-    if (to.name === 'Login' || to.meta.noNeedLogin) {
-      next()
-    } else {
+    if (to.meta.requireAuth) {
       next({
-        path: '/login'
+        path: '/login',
+        query: { redirect: to.fullPath }
       })
+    } else {
+      next()
     }
   }
-
-  return next()
 })
 
 router.afterEach(to => {

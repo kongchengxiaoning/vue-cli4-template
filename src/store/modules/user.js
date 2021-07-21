@@ -21,9 +21,9 @@ const user = {
     login({ commit }, userInfo) {
       const { userName, password } = userInfo
       return new Promise((resolve, reject) => {
-        setLogin({ userName, password }).then(data => {
-          commit('setUserInfo', data)
-          setToken(data.token)
+        setLogin({ userName, password }).then(res => {
+          commit('setUserInfo', res.data)
+          setToken(res.data.token)
           window.location.href = BASE_URL.PRO
           resolve()
         }).catch(error => {
