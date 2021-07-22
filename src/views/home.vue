@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
+    <h1 v-copy="`${'Home'}`">Home</h1>
     <img :src="logoUrl" alt="vue">
     <div>
       <el-button @click="setLogout">退出</el-button>
@@ -11,8 +11,13 @@
 <script>
 import logoUrl from '@/assets/images/logo.png'
 
+import copy from '@/directive/copy' // 导入copy指令
+
 export default {
   name: 'Home',
+  directives: {
+    copy
+  },
   data() {
     return {
       logoUrl
