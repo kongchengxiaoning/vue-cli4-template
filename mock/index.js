@@ -7,8 +7,8 @@ Mock.setup({
 })
 
 // 登录获取用户信息
-Mock.mock(/\/login/, login)
+Mock.mock(/\/login$/, login)
 // 注销登录信息
-Mock.mock(/\/logout/, logout)
+Mock.mock(/\/logout$/, logout)
 
 export default Mock
