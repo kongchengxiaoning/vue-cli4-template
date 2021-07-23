@@ -1,25 +1,64 @@
-const USER_MAP = {
+import { Random } from 'mockjs'
+
+const tokens = {
   admin: {
-    name: 'admin',
-    user_id: 1,
-    token: 'admin'
+    token: 'admin-token'
+  },
+  editor: {
+    token: 'editor-token'
+  }
+}
+
+const users = {
+  'admin-token': {
+    roles: ['admin'],
+    introduction: Random.cparagraph(1),
+    avatar: Random.image('100x100', '#45b97c'),
+    name: Random.cname()
+  },
+  'editor-token': {
+    roles: ['editor'],
+    introduction: Random.cparagraph(2),
+    avatar: Random.image('100x100', '#4A7BF7'),
+    name: Random.cname()
   }
 }
 
 // user login
-export const login = req => {
-  req = JSON.parse(req.body)
-  if (req.password !== '123456' || req.userName !== 'admin') {
+export const login = config => {
+  const { userName } = JSON.parse(config.body)
+  const token = tokens[userName]
+
+  if (!token) {
     return {
-      code: 400,
-      msg: '账号不匹配',
-      data: {}
+      code: '60204',
+      msg: '帐户或密码不正确'
     }
   }
+
   return {
     code: '0000',
     msg: 'success',
-    data: USER_MAP[req.userName]
+    data: token
+  }
+}
+
+// user userInfo
+export const userInfo = config => {
+  const { token } = JSON.parse(config.body)
+  const info = users[token]
+
+  if (!info) {
+    return {
+      code: '50008',
+      msg: '登录失败，无法获取用户详细信息。'
+    }
+  }
+
+  return {
+    code: '0000',
+    msg: 'success',
+    data: info
   }
 }
 
@@ -28,6 +67,6 @@ export const logout = () => {
   return {
     code: '0000',
     msg: '成功',
-    data: {}
+    data: 'success'
   }
 }

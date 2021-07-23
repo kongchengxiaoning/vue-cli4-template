@@ -1,14 +1,16 @@
 import Mock from 'mockjs'
-import { login, logout } from './modules/user' // 用户相关方法
+import { login, logout, userInfo } from './modules/user' // 用户相关方法
 
 // 可以设置响应的时间
 Mock.setup({
   timeout: '100 - 1000'
 })
 
-// 登录获取用户信息
-Mock.mock(/\/login$/, login)
+// 登录获取登录信息
+Mock.mock(/\/login\/login/, 'post', login)
+// 登录获取登录信息
+Mock.mock(/\/login\/user_info/, 'post', userInfo)
 // 注销登录信息
-Mock.mock(/\/logout$/, logout)
+Mock.mock(/\/login\/logout/, 'post', logout)
 
 export default Mock

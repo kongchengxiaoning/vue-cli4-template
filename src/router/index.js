@@ -1,20 +1,30 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from '@/store'
-import config from '@/assets/scripts/config'
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
-import { getToken } from '@/utils/auth'
 
+/* Layout */
 import Layout from '@/layout'
+
+/* Router Modules */
 import ERROR_ROUTES from '@/router/modules/error' // 错误页面路由
 
-NProgress.configure({ showSpinner: false }) // NProgress Configuration
-const { TITLE } = config
+/**
+ * hidden: true                   if set true, item will not show in the sidebar(default is false)
+ * name:'router-name'             the name is used by <keep-alive> (must set!!!)
+ * meta : {
+    roles: ['admin','editor']     control the page roles (you can set multiple roles)
+    title: 'title'                the name show in sidebar and breadcrumb (recommend set)
+    requireAuth: true             Do you want to authorize access to the page
+  }
+ */
 
 Vue.use(Router)
 
-const routes = [
+/**
+ * constantRoutes
+ * a base page that does not have permission requirements
+ * all roles can be accessed
+ */
+export const constantRoutes = [
   {
     path: '/',
     component: Layout,
@@ -32,8 +42,18 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: () => import('@/views/login/index'),
-    hidden: true
-  },
+    hidden: true,
+    meta: { title: '登录' }
+  }
+]
+
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
+
+export const asyncRoutes = [
+  // 404 page must be placed at the end !!!
   ...ERROR_ROUTES
 ]
 
@@ -41,7 +61,7 @@ const createRouter = () => new Router({
   base: process.env.BASE_URL,
   mode: 'history',
   scrollBehavior: () => ({ x: 0, y: 0 }),
-  routes
+  routes: constantRoutes
 })
 
 const router = createRouter()
@@ -58,57 +78,5 @@ const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
-
-router.beforeEach(async(to, from, next) => {
-  // 开始进度条
-  NProgress.start()
-  // 获取Token
-  const hasToken = getToken()
-  // 登录未过期或打开页面不需要登录
-  if (hasToken) {
-    if (to.path === '/login') {
-      next({ path: '/' })
-      NProgress.done()
-    } else {
-      // 获取用户信息
-      if (store.getters.userInfo) {
-        next()
-      } else {
-        try {
-          throw new Error('没获取到信息')
-          // get user info
-          // next({ ...to, replace: true })
-        } catch (error) {
-          await store.dispatch('user/logout')
-          next({
-            path: '/login',
-            query: { redirect: to.fullPath }
-          })
-          NProgress.done()
-        }
-      }
-    }
-  } else {
-    if (to.meta.requireAuth) {
-      next({
-        path: '/login',
-        query: { redirect: to.fullPath }
-      })
-      NProgress.done()
-    } else {
-      next()
-    }
-  }
-})
-
-router.afterEach(to => {
-  // 结束进度条
-  NProgress.done()
-  // 路由发生变化
-  const metaTitle = to.meta.title
-  if (metaTitle) {
-    window.document.title = `${TITLE}-${metaTitle}`
-  }
-})
 
 export default router

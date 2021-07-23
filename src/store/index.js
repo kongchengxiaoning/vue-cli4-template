@@ -26,7 +26,7 @@ export default new Vuex.Store({
     // 可以有多个持久化实例
     createPersistedState({
       key: `vue2`, // 状态保存到本地的 key
-      paths: ['user.userInfo'], // 要持久化的状态，在state里面取
+      paths: [], // 要持久化的状态，在state里面取
       storage: { // 存储方式定义
         getItem: (key) => localStorage.getItem(key), // 获取
         setItem: (key, value) => localStorage.setItem(key, value), // 存储
