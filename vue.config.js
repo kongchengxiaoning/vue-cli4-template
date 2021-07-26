@@ -41,6 +41,8 @@ module.exports = {
   productionSourceMap: true,
   // 打包生成的静态资源目录
   outputDir: 'dist',
+  // 配置js、css静态资源二级目录的位置
+  assetsDir: 'static',
   // 是否使用eslint,设置为true
   lintOnSave: process.env.NODE_ENV === 'development',
   // 开发服务器设置
