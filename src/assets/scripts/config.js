@@ -17,7 +17,11 @@ export default {
   /**
    * @description 请求Token的key
    */
-  TOKEN_KEY: 'token',
+  TOKEN_KEY: 'vue2-token',
+  /**
+   * @description token在Cookie中存储的天数
+   */
+  COOKIE_EXPIRES: 1,
   /**
    * @description 请求基础路径
    */
@@ -32,5 +36,11 @@ export default {
   /**
    * @description 接口超时时间 毫秒
    */
-  TIMEOUT: 1000 * 60 * 10
+  TIMEOUT: 1000 * 60 * 10,
+  /**
+   * @description 分页
+   */
+  PAGE: 1,
+  PAGE_SIZE: 20,
+  PAGER_COUNT: 7
 }
